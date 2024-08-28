@@ -19,6 +19,6 @@ public class Bow : MonoBehaviour
         Vector3 currPos = transform.localPosition;
         mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.localPosition = new Vector3(Mathf.Clamp(mousePos.x,-4.5f, 4.5f), currPos.y, currPos.z);
+        transform.localPosition = new Vector3(Mathf.Clamp(mousePos.x,-2.5f, 4.5f), currPos.y, currPos.z);
     }
 }
