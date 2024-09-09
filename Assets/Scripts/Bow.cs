@@ -5,12 +5,31 @@ using UnityEngine;
 public class Bow : MonoBehaviour
 {
     Vector3 mousePos;
+
     [SerializeField]
-    float moveSpeed = 0.1f;
+    float bowClampMin = -2.5f;
+    [SerializeField]
+    float bowClampMax = 4.5f;
+    [SerializeField]
+    float bowMoveThreshold = 0.01f;
+
+
+    float clampedBowPos;
+
+    bool isMoving = false;
+    float prevMouseMovement =0;
+    float currMouseMovement =0;
+
+    int maxFrameCnt = 4;
+    int frameCnt = 0;
+    public bool GetIsMoving()
+    {
+        return isMoving;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,6 +38,31 @@ public class Bow : MonoBehaviour
         Vector3 currPos = transform.localPosition;
         mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.localPosition = new Vector3(Mathf.Clamp(mousePos.x,-2.5f, 4.5f), currPos.y, currPos.z);
+        clampedBowPos = Mathf.Clamp(mousePos.x, bowClampMin, bowClampMax);
+        transform.localPosition = new Vector3(clampedBowPos, currPos.y, currPos.z);
+        if(frameCnt < maxFrameCnt)
+        {
+            frameCnt++;
+            currMouseMovement += Input.GetAxisRaw("Mouse X");
+        }
+        else
+        {
+            frameCnt = 0;
+            if(currMouseMovement != 0)
+            {
+                isMoving = true;
+                if(Mathf.Sign(prevMouseMovement) != Mathf.Sign(currMouseMovement))
+                {
+                    //bow moved other way play note attack
+                    isMoving = false;
+                }
+            }
+            else
+            {
+                isMoving = false;
+            }
+            prevMouseMovement = currMouseMovement;
+            currMouseMovement = 0;
+        }
     }
 }

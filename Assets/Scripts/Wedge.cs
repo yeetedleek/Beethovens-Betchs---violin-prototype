@@ -9,7 +9,6 @@ public class Wedge : MonoBehaviour
     [SerializeField]
     Sprite inactiveSprite;
     
-    
     SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()

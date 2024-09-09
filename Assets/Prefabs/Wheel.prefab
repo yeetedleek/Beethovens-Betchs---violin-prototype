@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5909455646450977740}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8739311312972701557
 SpriteRenderer:
@@ -328,8 +328,8 @@ Transform:
   m_Children:
   - {fileID: 3003946334221478615}
   - {fileID: 2359176722884859121}
-  - {fileID: 4729802046320893620}
   - {fileID: 2636091912769226209}
+  - {fileID: 4729802046320893620}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -348,8 +348,8 @@ MonoBehaviour:
   wedges:
   - {fileID: 3589494920115673651}
   - {fileID: 7673906129810127131}
-  - {fileID: 6456704459096876135}
   - {fileID: 794054589471949201}
+  - {fileID: 6456704459096876135}
 --- !u!1 &8567486245199874793
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +381,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5909455646450977740}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1511005383933494096
 SpriteRenderer:

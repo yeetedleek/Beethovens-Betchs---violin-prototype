@@ -7,6 +7,8 @@ public class StringSelector : MonoBehaviour
     [SerializeField]
     Wheel wheel;
     bool[] wedgeStats;
+    [SerializeField]
+    float wedgeIncrements = 11.25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,59 +20,72 @@ public class StringSelector : MonoBehaviour
     {
         ProcessInput();
     }
+    public bool[] GetWedgeStats()
+    {
+        return wedgeStats;
+    }
+    public bool IsAnyWedgeActive()
+    {
+        foreach(bool wedge in wedgeStats)
+        {
+            if(wedge)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     void ProcessInput()
     {
         float rotateDeg = 0.0f;
-        for(int i = 0; i < wedgeStats.Length; i++)
-        {
-            wedgeStats[i] = false;
-        }
+        bool[] tempWedgeStats = new bool[4];
 
         if (Input.GetKey(KeyCode.A))
         {
-            wedgeStats[0] = true;
+            tempWedgeStats[0] = true;
             if (Input.GetKey(KeyCode.S))
             {
-                rotateDeg = 45f;
-                wedgeStats[1] = true;
+                rotateDeg = wedgeIncrements*2;
+                tempWedgeStats[1] = true;
             }
             else
             {
-                rotateDeg = 67.5f;
+                rotateDeg = wedgeIncrements*3;
             }
         }
         else if(Input.GetKey(KeyCode.S))
         {
-            wedgeStats[1] = true;
+            tempWedgeStats[1] = true;
             if (Input.GetKey(KeyCode.D))
             {
                 rotateDeg = 0.0f;
-                wedgeStats[2] = true;
+                tempWedgeStats[2] = true;
             }
             else
             {
-                rotateDeg = 22.5f;
+                rotateDeg = wedgeIncrements;
             }
         }
         else if(Input.GetKey(KeyCode.D))
         {
-            wedgeStats[2] = true;
+            tempWedgeStats[2] = true;
             if (Input.GetKey(KeyCode.F))
             {
-                rotateDeg = -45f;
-                wedgeStats[3] = true;
+                rotateDeg = -wedgeIncrements*2;
+                tempWedgeStats[3] = true;
             }
             else
             {
-                rotateDeg = -22.5f;
+                rotateDeg = -wedgeIncrements;
             }
         }
         else if (Input.GetKey(KeyCode.F))
         {
-            rotateDeg = -67.5f;
-            wedgeStats[3] = true;
+            rotateDeg = -wedgeIncrements*3;
+            tempWedgeStats[3] = true;
         }
+        wedgeStats = tempWedgeStats;
         for(int i = 0; i < wedgeStats.Length; i++)
         {
             wheel.SetWedgeStatus(i, wedgeStats[i]);
