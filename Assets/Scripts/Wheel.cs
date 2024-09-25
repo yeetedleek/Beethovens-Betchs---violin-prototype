@@ -19,11 +19,21 @@ public class Wheel : MonoBehaviour
         
     }
 
-    public void SetWedgeStatus(int index, bool input)
+    public void SetWedgeStatus(ViolinStrings activeStrings)
     {
-        if(index < wedges.Length)
+        bool[] wedgeStats = new bool[wedges.Length];
+        int temp = (int)activeStrings;
+        if(activeStrings != ViolinStrings.None)
         {
-            wedges[index].SetSpriteActive(input);
+            wedgeStats[temp / 2] = true;
+            if(temp % 2 != 0)
+            {
+                wedgeStats[(temp / 2) + 1] = true;
+            }
+        }
+        for(int i = 0; i < wedges.Length; i++)
+        {
+            wedges[i].SetSpriteActive(wedgeStats[i]);
         }
     }
 }

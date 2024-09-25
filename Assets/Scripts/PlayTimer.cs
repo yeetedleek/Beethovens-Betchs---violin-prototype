@@ -29,6 +29,11 @@ public class PlayTimer : MonoBehaviour
         isTimerRunning = true;
     }
 
+    public bool IsTimerRunning()
+    {
+        return isTimerRunning;
+    }
+
     public float GetPlayTime()
     {
         return currTime;

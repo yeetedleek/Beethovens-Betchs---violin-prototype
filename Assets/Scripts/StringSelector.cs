@@ -6,90 +6,91 @@ public class StringSelector : MonoBehaviour
 {
     [SerializeField]
     Wheel wheel;
-    bool[] wedgeStats;
+    ViolinStrings activeStrings = ViolinStrings.None;
     [SerializeField]
     float wedgeIncrements = 11.25f;
+    [SerializeField]
+    int skipFrames = 8;
+    int frameCnt = 0;
     // Start is called before the first frame update
     void Start()
     {
-        wedgeStats = new bool[4];
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        if(++frameCnt > skipFrames)
+        {
+            frameCnt = 0;
+            ProcessInput();
+            wheel.SetWedgeStatus(activeStrings);
+        }
     }
-    public bool[] GetWedgeStats()
+    public ViolinStrings GetActiveStrings()
     {
-        return wedgeStats;
+        return activeStrings;
     }
     public bool IsAnyWedgeActive()
     {
-        foreach(bool wedge in wedgeStats)
+        if(activeStrings == ViolinStrings.None)
         {
-            if(wedge)
-            {
-                return true;
-            }
+            return false;
         }
-        return false;
+        return true;
     }
 
     void ProcessInput()
     {
         float rotateDeg = 0.0f;
-        bool[] tempWedgeStats = new bool[4];
+        ViolinStrings tempStrings = ViolinStrings.None;
 
         if (Input.GetKey(KeyCode.A))
         {
-            tempWedgeStats[0] = true;
             if (Input.GetKey(KeyCode.S))
             {
+                tempStrings = ViolinStrings.BlueGreen;
                 rotateDeg = wedgeIncrements*2;
-                tempWedgeStats[1] = true;
             }
             else
             {
+                tempStrings = ViolinStrings.Blue;
                 rotateDeg = wedgeIncrements*3;
             }
         }
         else if(Input.GetKey(KeyCode.S))
         {
-            tempWedgeStats[1] = true;
             if (Input.GetKey(KeyCode.D))
             {
+                tempStrings = ViolinStrings.GreenYellow;
                 rotateDeg = 0.0f;
-                tempWedgeStats[2] = true;
             }
             else
             {
+                tempStrings = ViolinStrings.Green;
                 rotateDeg = wedgeIncrements;
             }
         }
         else if(Input.GetKey(KeyCode.D))
         {
-            tempWedgeStats[2] = true;
+
             if (Input.GetKey(KeyCode.F))
             {
                 rotateDeg = -wedgeIncrements*2;
-                tempWedgeStats[3] = true;
+                tempStrings = ViolinStrings.YellowRed;
             }
             else
             {
+                tempStrings = ViolinStrings.Yellow;
                 rotateDeg = -wedgeIncrements;
             }
         }
         else if (Input.GetKey(KeyCode.F))
         {
             rotateDeg = -wedgeIncrements*3;
-            tempWedgeStats[3] = true;
+            tempStrings = ViolinStrings.Red;
         }
-        wedgeStats = tempWedgeStats;
-        for(int i = 0; i < wedgeStats.Length; i++)
-        {
-            wheel.SetWedgeStatus(i, wedgeStats[i]);
-        }
+        activeStrings = tempStrings;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotateDeg);
     }
 }

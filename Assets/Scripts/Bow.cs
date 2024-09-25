@@ -10,8 +10,6 @@ public class Bow : MonoBehaviour
     float bowClampMin = -2.5f;
     [SerializeField]
     float bowClampMax = 4.5f;
-    [SerializeField]
-    float bowMoveThreshold = 0.01f;
 
 
     float clampedBowPos;
@@ -21,7 +19,7 @@ public class Bow : MonoBehaviour
     float currMouseMovement =0;
 
     [SerializeField]
-    int skipFrames = 6;
+    int skipFrames = 8;
     int frameCnt = 0;
     public bool GetIsMoving()
     {
