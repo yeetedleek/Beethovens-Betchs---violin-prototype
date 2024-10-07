@@ -10,8 +10,8 @@ public class StringSelector : MonoBehaviour
     [SerializeField]
     float wedgeIncrements = 11.25f;
     [SerializeField]
-    int skipFrames = 8;
-    int frameCnt = 0;
+    float maxCuTime = 0.1f;
+    float cuTime = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +20,10 @@ public class StringSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(++frameCnt > skipFrames)
+        cuTime += Time.deltaTime;
+        if(cuTime > maxCuTime)
         {
-            frameCnt = 0;
+            cuTime = 0;
             ProcessInput();
             wheel.SetWedgeStatus(activeStrings);
         }

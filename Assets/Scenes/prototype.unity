@@ -703,6 +703,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2661228529719237080, guid: b18bd74d747e8104998d5c9d1cc4503a, type: 3}
+      propertyPath: maxCuTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661228529719237080, guid: b18bd74d747e8104998d5c9d1cc4503a, type: 3}
       propertyPath: skipFrames
       value: 8
       objectReference: {fileID: 0}
@@ -710,6 +714,10 @@ PrefabInstance:
       propertyPath: wheel
       value: 
       objectReference: {fileID: 248354291}
+    - target: {fileID: 5817236075854576420, guid: b18bd74d747e8104998d5c9d1cc4503a, type: 3}
+      propertyPath: maxCuTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8385971305570696569, guid: b18bd74d747e8104998d5c9d1cc4503a, type: 3}
       propertyPath: m_Name
       value: Bow
@@ -919,6 +927,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8068645835435060128, guid: 41e955ef3d9f19848b287b58ce81b709, type: 3}
+      propertyPath: timeLeeLeeway
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8068645835435060131, guid: 41e955ef3d9f19848b287b58ce81b709, type: 3}
       propertyPath: m_Name
       value: Player

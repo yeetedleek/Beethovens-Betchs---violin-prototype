@@ -19,8 +19,8 @@ public class Bow : MonoBehaviour
     float currMouseMovement =0;
 
     [SerializeField]
-    int skipFrames = 8;
-    int frameCnt = 0;
+    float maxCuTime = 0.1f;
+    float cuTime = 0;
     public bool GetIsMoving()
     {
         return isMoving;
@@ -39,14 +39,14 @@ public class Bow : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         clampedBowPos = Mathf.Clamp(mousePos.x, bowClampMin, bowClampMax);
         transform.localPosition = new Vector3(clampedBowPos, currPos.y, currPos.z);
-        if(frameCnt < skipFrames)
+        if(cuTime < maxCuTime)
         {
-            frameCnt++;
+            cuTime += Time.deltaTime;
             currMouseMovement += Input.GetAxisRaw("Mouse X");
         }
         else
         {
-            frameCnt = 0;
+            cuTime = 0;
             if(currMouseMovement != 0)
             {
                 isMoving = true;
